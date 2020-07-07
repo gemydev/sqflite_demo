@@ -8,7 +8,11 @@ class UserList extends StatelessWidget {
   final List<User> items;
   final HomePresenter homePresenter;
 
-  UserList(this.items, this.homePresenter, {Key key,}) : super(key: key);
+  UserList(
+    this.items,
+    this.homePresenter, {
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,13 @@ class UserList extends StatelessWidget {
                     children: <Widget>[
                       new CircleAvatar(
                         radius: 30.0,
-                        child: new Text(getShortName(items[index])),
+                        child: new Text(
+                          getShortName(items[index]),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17),
+                        ),
                         backgroundColor: Colors.blueAccent,
                       ),
                       new Expanded(
@@ -37,9 +47,11 @@ class UserList extends StatelessWidget {
                                     " " +
                                     items[index].lastName,
                                 // set some style to text
+                                overflow: TextOverflow.ellipsis,
                                 style: new TextStyle(
-                                    fontSize: 20.0,
-                                    color: Colors.black),
+                                  fontSize: 20.0,
+                                  color: Colors.black,
+                                ),
                               ),
                               new Text(
                                 "DATE: " + items[index].dob,
@@ -57,23 +69,21 @@ class UserList extends StatelessWidget {
                           new IconButton(
                             icon: const Icon(
                               Icons.edit,
-                              color: const Color(0xFF167F67),
+                              color: Colors.blue,
                             ),
                             onPressed: () => edit(items[index], context),
                           ),
-
                           new IconButton(
                             icon: const Icon(Icons.delete_forever,
-                                color: const Color(0xFF167F67)),
-                            onPressed: () =>
-                                homePresenter.delete(items[index]),
+                                color: Colors.blue),
+                            onPressed: () => homePresenter.delete(items[index]),
                           ),
                         ],
                       ),
                     ],
                   ),
                 ),
-                padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0)),
+                padding: const EdgeInsets.only(left: 10)),
           );
         });
   }
@@ -81,6 +91,7 @@ class UserList extends StatelessWidget {
   displayRecord() {
     homePresenter.updateScreen();
   }
+
   edit(User user, BuildContext context) {
     showDialog(
       context: context,

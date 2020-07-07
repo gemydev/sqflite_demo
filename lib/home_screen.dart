@@ -12,6 +12,7 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => new _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> implements HomeContract {
   HomePresenter homePresenter;
 
@@ -21,13 +22,9 @@ class _MyHomePageState extends State<MyHomePage> implements HomeContract {
     homePresenter = new HomePresenter(this);
   }
 
-  displayRecord() {
-    setState(() {});
-  }
-
   Widget _buildTitle(BuildContext context) {
     var horizontalTitleAlignment =
-    Platform.isIOS ? CrossAxisAlignment.center : CrossAxisAlignment.center;
+        Platform.isIOS ? CrossAxisAlignment.center : CrossAxisAlignment.center;
     return new InkWell(
       child: new Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -35,7 +32,8 @@ class _MyHomePageState extends State<MyHomePage> implements HomeContract {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: horizontalTitleAlignment,
           children: <Widget>[
-            new Text('User Database',
+            new Text(
+              'User Database',
               style: new TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -53,8 +51,6 @@ class _MyHomePageState extends State<MyHomePage> implements HomeContract {
       builder: (BuildContext context) =>
           new AddUserDialog().buildAboutDialog(context, this, false, null),
     );
-
-    setState(() {});
   }
 
   List<Widget> _buildActions() {
@@ -83,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> implements HomeContract {
           if (snapshot.hasError) print(snapshot.error);
           var data = snapshot.data;
           return snapshot.hasData
-              ? new UserList(data,homePresenter)
+              ? new UserList(data, homePresenter)
               : new Center(child: new CircularProgressIndicator());
         },
       ),

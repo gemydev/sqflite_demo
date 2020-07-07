@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:finalsqflite/user_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -43,7 +42,7 @@ class DatabaseHelper {
     List<User> employees = new List();
     for (int i = 0; i < list.length; i++) {
       var user =
-      new User(list[i]["firstname"], list[i]["lastname"], list[i]["dob"]);
+          new User(list[i]["firstname"], list[i]["lastname"], list[i]["dob"]);
       user.setUserId(list[i]["id"]);
       employees.add(user);
     }
@@ -55,13 +54,13 @@ class DatabaseHelper {
     var dbClient = await db;
 
     int res =
-    await dbClient.rawDelete('DELETE FROM User WHERE id = ?', [user.id]);
+        await dbClient.rawDelete('DELETE FROM User WHERE id = ?', [user.id]);
     return res;
   }
 
   Future<bool> update(User user) async {
     var dbClient = await db;
-    int res =   await dbClient.update("User", user.toMap(),
+    int res = await dbClient.update("User", user.toMap(),
         where: "id = ?", whereArgs: <int>[user.id]);
     return res > 0 ? true : false;
   }
